@@ -23,3 +23,8 @@ spec:
   values:
     service:
       type: ClusterIP
+    controller:
+      ingressClassResource:
+        default: true
+      # setAsDefaultIngress: true
+    watchIngressWithoutClass: true
