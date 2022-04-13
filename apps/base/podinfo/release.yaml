@@ -26,3 +26,8 @@ spec:
       annotations:
         kubernetes.io/ingress.class: nginx
         external-dns.alpha.kubernetes.io/target: k8s-tunnel-origin.jacobdanovitch.me
+      hosts:
+        - host: podinfo.jacobdanovitch.me
+          paths:
+            - path: /
+              pathType: Prefix
