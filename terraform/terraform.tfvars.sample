@@ -1,0 +1,7 @@
+cloudflare_zone = ""
+cloudflare_account_id = ""
+cloudflare_email = ""
+cloudflare_token = ""
+kubernetes_config_path = ""
+kubernetes_context = ""
+ingress_controller_endpoint = ""
