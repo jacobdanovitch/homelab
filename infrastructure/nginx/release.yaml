@@ -4,27 +4,34 @@ metadata:
   name: nginx
   namespace: cluster-config
 spec:
-  targetNamespace: nginx
-  releaseName: nginx-ingress-controller
+  targetNamespace: ingress-nginx
+  releaseName: ingress-nginx
   chart:
     spec:
-      chart: nginx-ingress-controller
+      chart: ingress-nginx
       sourceRef:
         kind: HelmRepository
-        name: bitnami
+        name: nginx
         namespace: cluster-config
-      version: "5.6.14"
+      version: "4.0.19"
   interval: 1h0m0s
   install:
     remediation:
       retries: 3
   # Default values
-  # https://github.com/bitnami/charts/blob/master/bitnami/nginx-ingress-controller/values.yaml
+  # https://github.com/kubernetes/ingress-nginx/blob/main/charts/ingress-nginx/values.yaml
   values:
-    service:
-      type: ClusterIP
     controller:
+      service:
+        type: ClusterIP
+        external: 
+          enabled: false
+        internal: 
+          enabled: true
       ingressClassResource:
         default: true
+        enabled: true
       # setAsDefaultIngress: true
-    watchIngressWithoutClass: true
+      watchIngressWithoutClass: true
+    defaultBackend:
+      enabled: true
