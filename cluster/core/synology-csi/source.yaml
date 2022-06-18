@@ -1,0 +1,16 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: synology
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: https://github.com/SynologyOpenSource/synology-csi
+  timeout: 3m
+  ref:
+    branch: master
+  ignore: |
+    # exclude all
+    /*
+    # include charts directory
+    !/charts/

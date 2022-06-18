@@ -1,0 +1,22 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: sealed-secrets
+  namespace: flux-system
+spec:
+  targetNamespace: default
+  releaseName: sealed-secrets
+  chart:
+    spec:
+      chart: sealed-secrets
+      sourceRef:
+        kind: HelmRepository
+        name: sealed-secrets
+        namespace: flux-system
+  interval: 1h0m0s
+  install:
+    remediation:
+      retries: 3
+  # https://github.com/bitnami-labs/sealed-secrets/tree/main/helm/sealed-secrets
+  values:
+    fullnameOverride: sealed-secrets-controller
