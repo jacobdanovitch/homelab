@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - azure-arc
-  - sealed-secrets
-  # - nginx
+  # - sealed-secrets
+  - nginx
   - synology-csi
-  # - cloudflared
+  - cloudflared
