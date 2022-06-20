@@ -7,6 +7,7 @@ resources:
   - source.yaml
   - release.yaml
   - namespace.yaml
+  - storageclass-smb.yaml
   # - http://raw.githubusercontent.com/SynologyOpenSource/synology-csi/main/deploy/kubernetes/v1.20/storage-class.yml
   # - http://raw.githubusercontent.com/SynologyOpenSource/synology-csi/main/deploy/kubernetes/v1.20/node.yml
   # - http://raw.githubusercontent.com/SynologyOpenSource/synology-csi/main/deploy/kubernetes/v1.20/controller.yml
