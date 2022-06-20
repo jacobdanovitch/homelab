@@ -10,5 +10,6 @@ resources:
   # - requesterr
   # - site
   # - tandoor
+  
 patchesStrategicMerge:
   - podinfo-values.yaml

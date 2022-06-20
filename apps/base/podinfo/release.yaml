@@ -21,13 +21,13 @@ spec:
   # https://github.com/stefanprodan/podinfo/blob/master/charts/podinfo/values.yaml
   values:
     cache: redis-master.redis:6379
-    ingress:
-      enabled: true
-      annotations:
-        kubernetes.io/ingress.class: nginx
+    # ingress:
+    #   enabled: true
+    #   annotations:
+    #     kubernetes.io/ingress.class: nginx
         # external-dns.alpha.kubernetes.io/target: k8s-tunnel-origin.jacobdanovitch.me
-      hosts:
-        - host: podinfo.jacobdanovitch.me
-          paths:
-            - path: /
-              pathType: Prefix
+      # hosts:
+      #   - host: homelab.jacobdanovitch.me # TODO: Move to patch
+      #     paths:
+      #       - path: /podinfo
+      #         pathType: Exact

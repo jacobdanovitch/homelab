@@ -2,15 +2,28 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: podinfo
-  namespace: cluster-config
+  namespace: flux-system
 spec:
   chart:
     spec:
       version: ">=1.0.0"
   values:
     ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        nginx.ingress.kubernetes.io/rewrite-target: /
+        # external-dns.alpha.kubernetes.io/target: k8s-tunnel-origin.jacobdanovitch.me
       hosts:
-        - host: podinfo.homelab.jacobdanovitch.me
+        - host: homelab.jacobdanovitch.me
           paths:
-            - path: /
-              # pathType: ImplementationSpecific
+            - path: /podinfo
+              pathType: Exact
+        # - host: podinfo.homelab.jacobdanovitch.me
+        #   paths:
+        #     - path: / # podinfo
+        #       pathType: Exact # ImplementationSpecific
+        # - host: labinfo.homelab.jacobdanovitch.me
+        #   paths:
+        #     - path: / # podinfo
+        #       pathType: Exact # ImplementationSpecific
