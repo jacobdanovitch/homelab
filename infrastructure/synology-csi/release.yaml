@@ -21,7 +21,7 @@ spec:
   # https://github.com/christian-schlichtherle/synology-csi-chart
   values:
     connections:
-    - host: 192.168.2.30   # the IP V4 address of the Diskstation
+    - host: 192.168.2.31   # the IP V4 address of the Diskstation
       port: 5000          # the port for connecting to the Diskstation Manager application
       https: false        # whether the port expects HTTPS or not
       username: ${SYNOLOGY_USERNAME}
