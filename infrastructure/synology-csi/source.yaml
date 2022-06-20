@@ -1,0 +1,11 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: synology-csi-chart
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: https://github.com/christian-schlichtherle/synology-csi-chart
+  timeout: 3m
+  ref:
+    branch: main

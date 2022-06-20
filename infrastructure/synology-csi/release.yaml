@@ -1,0 +1,28 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: synology-csi
+  namespace: flux-system
+spec:
+  targetNamespace: synology-csi
+  releaseName: synology
+  chart:
+    spec:
+      chart: ./
+      sourceRef:
+        kind: GitRepository
+        name: synology-csi-chart
+        namespace: flux-system
+  interval: 1h0m0s
+  install:
+    remediation:
+      retries: 3
+  # Default values
+  # https://github.com/christian-schlichtherle/synology-csi-chart
+  values:
+    connections:
+    - host: 192.168.2.30   # the IP V4 address of the Diskstation
+      port: 5000          # the port for connecting to the Diskstation Manager application
+      https: false        # whether the port expects HTTPS or not
+      username: ${SYNOLOGY_USERNAME}
+      password: ${SYNOLOGY_PASSWORD}
