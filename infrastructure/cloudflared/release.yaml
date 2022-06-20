@@ -27,7 +27,7 @@ spec:
       secret: ${CLOUDFLARED_TUNNEL_SECRET}
       ingress:
         - hostname: homelab.jacobdanovitch.me
-          service: https://ingress-nginx-controller.ingress-nginx.svc.cluster.local
+          service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local
 
     image:
       tag: 2022.6.2
