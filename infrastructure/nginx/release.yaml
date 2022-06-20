@@ -1,0 +1,37 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nginx
+  namespace: flux-system
+spec:
+  targetNamespace: ingress-nginx
+  releaseName: ingress-nginx
+  chart:
+    spec:
+      chart: ingress-nginx
+      sourceRef:
+        kind: HelmRepository
+        name: nginx
+        namespace: flux-system
+      # version: "4.0.19"
+  interval: 1h0m0s
+  install:
+    remediation:
+      retries: 3
+  # Default values
+  # https://github.com/kubernetes/ingress-nginx/blob/main/charts/ingress-nginx/values.yaml
+  values:
+    controller:
+      service:
+        type: ClusterIP
+        # external: 
+        #   enabled: false
+        # internal: 
+        #   enabled: true
+      ingressClassResource:
+        default: true
+        enabled: true
+      setAsDefaultIngress: true
+      watchIngressWithoutClass: true
+    defaultBackend:
+      enabled: true
