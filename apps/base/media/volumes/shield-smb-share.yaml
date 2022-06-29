@@ -1,0 +1,41 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvc-shield-media
+  namespace: media
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 250Gi
+  volumeName: pv-shield-media
+  storageClassName: smb
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-shield-media
+spec:
+  capacity:
+    storage: 250Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: smb
+  mountOptions:
+    - dir_mode=0777
+    - file_mode=0777
+    - noserverino
+    - uid=1000
+    - gid=1000
+  csi:
+    driver: smb.csi.k8s.io
+    readOnly: false
+    volumeHandle: pv-shield-media-MTQ5MDkK  # echo $RANDOM | base64
+    volumeAttributes:
+      source: "//192.168.2.30/Samsung_T5/NVIDIA_SHIELD"
+    nodeStageSecretRef:
+      name: creds-shield
+      namespace: flux-system

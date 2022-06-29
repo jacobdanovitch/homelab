@@ -1,0 +1,113 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: qbittorrent
+  namespace: flux-system
+spec:
+  targetNamespace: media
+  releaseName: qbittorrent
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: qbittorrent
+      version: 13.0.1
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      repository: ghcr.io/k8s-at-home/qbittorrent
+      tag: v4.3.8
+      pullPolicy: IfNotPresent
+
+    env:
+      TZ: "America/Toronto"
+
+    podSecurityContext:
+      runAsUser: 0 # 1000
+      runAsGroup: 0 # 1000
+      fsGroup: 0 # 1000
+
+    persistence:
+      # config:
+      #   enabled: true
+      #   existingClaim: qbittorrent-config
+      #   mountPath: /config
+      # qbittorrent-cache:
+      #   enabled: true
+      #   existingClaim: qbittorrent-cache
+      #   mountPath: /downloads
+      config:
+        enabled: true
+        mountPath: /config
+        nameOverride: config
+        storageClass: local-path
+        size: 1Gi
+        retain: true
+      qbittorrent-cache:
+        enabled: true
+        existingClaim: pvc-syn-media
+        subPath: downloads
+        mountPath: /config/downloads
+      # nfs-downloads-media:
+      #   enabled: true
+      #   existingClaim: nfs-downloads-media
+      #   mountPath: "/mnt/storage/downloads"
+
+    service:
+      bittorrent:
+        enabled: true
+        type: ClusterIP
+        ports:
+          bittorrent:
+            port: 50413
+            name: bittorrent
+            protocol: TCP
+            targetPort: 6881
+        externalTrafficPolicy: Local
+
+    # ingress:
+    #   main:
+    #     enabled: true
+    #     ingressClassName: "nginx"
+    #     annotations:
+    #       nginx.ingress.kubernetes.io/configuration-snippet: |
+    #         proxy_set_header Accept-Encoding "";
+    #         sub_filter '</head>' '<link rel="stylesheet" type="text/css" href="https://gilbn.github.io/theme.park/CSS/themes/qbittorrent/space-gray.css"></head>';
+    #         sub_filter_once on;
+    #     #  traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    #     hosts:
+    #       - host: "qbittorrent.${SECRET_CLUSTER_DOMAIN}"
+    #         paths:
+    #           - path: /
+    #             pathType: Prefix
+    #     tls:
+    #       - hosts:
+    #           - "qbittorrent.${SECRET_CLUSTER_DOMAIN}"
+
+    resources:
+      requests:
+        memory: 2Gi
+        cpu: 500m
+
+    addons:
+      # -- The common chart supports adding a VPN add-on. It can be configured under this key.
+      # For more info, check out [our docs](http://docs.k8s-at-home.com/our-helm-charts/common-library-add-ons/#wireguard-vpn)
+      # @default -- See values.yaml
+      vpn:
+        # -- Enable running a VPN in the pod to route traffic through a VPN
+        enabled: false
+
+        # -- Specify the VPN type. Valid options are openvpn or wireguard
+        type: openvpn
+        wireguard:
+          image:
+            # -- Specify the WireGuard image
+            repository: ghcr.io/k8s-at-home/wireguard
+            # -- Specify the WireGuard image tag
+            tag: v1.0.20210914
+            # -- Specify the WireGuard image pull policy
+            pullPolicy: IfNotPresent
