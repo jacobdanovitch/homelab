@@ -15,14 +15,14 @@ spec:
         nginx.ingress.kubernetes.io/rewrite-target: /
         # external-dns.alpha.kubernetes.io/target: k8s-tunnel-origin.jacobdanovitch.me
       hosts:
-        - host: homelab.jacobdanovitch.me
-          paths:
-            - path: /podinfo
-              pathType: Exact
-        # - host: podinfo.homelab.jacobdanovitch.me
+        # - host: homelab.jacobdanovitch.me
         #   paths:
-        #     - path: / # podinfo
-        #       pathType: Exact # ImplementationSpecific
+        #     - path: /podinfo
+        #       pathType: Exact
+        - host: podinfo.mediabox.jacobdanovitch.me
+          paths:
+            - path: / # podinfo
+              pathType: Exact # ImplementationSpecific
         # - host: labinfo.homelab.jacobdanovitch.me
         #   paths:
         #     - path: / # podinfo
