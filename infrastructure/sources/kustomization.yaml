@@ -7,3 +7,4 @@ resources:
   - k8s-at-home.yaml
   - podinfo.yaml
   - cloudflare.yaml
+  - kubernetes-csi.yaml
