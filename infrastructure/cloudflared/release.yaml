@@ -8,10 +8,17 @@ spec:
   releaseName: homelab
   chart:
     spec:
-      chart: ./helm/cloudflare-tunnel
+      # chart: ./helm/cloudflare-tunnel
+      # sourceRef:
+      #   kind: GitRepository
+      #   name: cloudflared
+      #   namespace: flux-system
+      
+      # TODO: Consider migrating to https://github.com/adyanth/cloudflare-operator
+      chart: ./charts/cloudflared
       sourceRef:
         kind: GitRepository
-        name: cloudflared
+        name: flux-system
         namespace: flux-system
   interval: 1h0m0s
   install:
@@ -28,7 +35,6 @@ spec:
       ingress:
         # hostname: homelab.jacobdanovitch.me
         - service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local
-        # - service: http_status:404
 
     image:
       # https://github.com/cloudflare/cloudflared/issues/617
