@@ -1,0 +1,27 @@
+piVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: external-dns
+  namespace: flux-system
+spec:
+  targetNamespace: external-dns
+  releaseName: external-dns
+  chart:
+    spec:
+      chart: external-dns
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+      # version: "6.2.4"
+  interval: 1h0m0s
+  install:
+    remediation:
+      retries: 3
+  values:
+    provider: cloudflare
+    cloudflare:
+      proxied: true
+      email: ${CLOUDFLARE_EMAIL}
+      apiKey: ${CLOUDFLARE_API_KEY}
+    policy: sync
