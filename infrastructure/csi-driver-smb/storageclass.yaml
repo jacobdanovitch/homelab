@@ -8,9 +8,9 @@ parameters:
   # if csi.storage.k8s.io/provisioner-secret is provided, will create a sub directory
   # with PV name under source
   csi.storage.k8s.io/provisioner-secret-name: "creds-syn"
-  csi.storage.k8s.io/provisioner-secret-namespace: "smb"
+  csi.storage.k8s.io/provisioner-secret-namespace: "flux-system"
   csi.storage.k8s.io/node-stage-secret-name: "creds-syn"
-  csi.storage.k8s.io/node-stage-secret-namespace: "smb"
+  csi.storage.k8s.io/node-stage-secret-namespace: "flux-system"
 reclaimPolicy: Retain  # available values: Delete, Retain
 volumeBindingMode: Immediate
 mountOptions:

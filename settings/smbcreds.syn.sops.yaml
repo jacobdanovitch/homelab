@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-    namespace: smb
+    namespace: flux-system
     name: creds-syn
 stringData:
     username: ENC[AES256_GCM,data:UjumtTjXfC0=,iv:cnqfDA6q0ENAFLadEdwuTKEf86GeHx3g/ZEOnIiKSvM=,tag:NYaGYVd6uWHm6HWhKHpVtw==,type:str]
@@ -21,8 +21,8 @@ sops:
             UFU0OHlnTlJGQW1BL1kzdU95YkdTTTAKWuLtdQFMOqBuZV2TlV3diPIEIMF96yjX
             y2wRm/QQLiNuJoOBiG/iH/DRFDloO6At+SaucLlfWzHz6lE0//oFzg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-06-26T14:45:28Z"
-    mac: ENC[AES256_GCM,data:C9sK7TzC5XeYuZsNhkruFG11oSYtJS6SXfzHMLBu5Qvo+8z2efXem6UYw0fLCt4Tkyw7za/s2camTFsmgMusq/IjbX/8SwQbHjx9MkIcddYaA5WzhrU9K+4vX81j/AhJcojFwbszMMSJmvecfymqqm1hs2qJ/5mQ3DmKyyKe024=,iv:TCRI8KF5m2KEYetwN6JraZWWaSJY3nJP7NoRWQjwWjQ=,tag:Igwszn7bTtdZkVolQDr6Wg==,type:str]
+    lastmodified: "2022-06-29T16:14:38Z"
+    mac: ENC[AES256_GCM,data:E1GCMaWozs2elBqIIuO513xdf2TIdPFDlAkyL2MBhc7ZSxNHKZqcxNkfRgaXSy6wGYZNJb+8RkJKdAx4Az+8yXY/74M8TAx+rkbfujWqs1JTG5uXtstwxuxLmSNv8gLtrUhB143fnvb5qJg5BAx2HXaDGM9Bz8MlRWAWU0odFJ8=,iv:puOg/+bx/nYYatu/WwAV+iZA8cr3Tz+90hXB0JGjQmM=,tag:3v4/16ArF2gpUMrq+gjCSg==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.7.3
