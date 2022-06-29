@@ -4,5 +4,5 @@ resources:
   - azure-arc
   # - sealed-secrets
   - nginx
-  - synology-csi
+  # - synology-csi
   - cloudflared
