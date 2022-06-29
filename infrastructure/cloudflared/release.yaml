@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: cloudflared
-  releaseName: cloudflared
+  releaseName: homelab
   chart:
     spec:
       chart: ./helm/cloudflare-tunnel
@@ -26,9 +26,10 @@ spec:
       tunnelId: ${CLOUDFLARED_TUNNEL_ID}
       secret: ${CLOUDFLARED_TUNNEL_SECRET}
       ingress:
-        - hostname: homelab.jacobdanovitch.me
-          service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local
+        # hostname: homelab.jacobdanovitch.me
+        - service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local
         # - service: http_status:404
 
     image:
+      # https://github.com/cloudflare/cloudflared/issues/617
       tag: 2022.4.1 # 2022.6.2
