@@ -1,0 +1,11 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: cloudflared
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: https://github.com/cloudflare/argo-tunnel-examples
+  timeout: 3m
+  ref:
+    branch: master
