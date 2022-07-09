@@ -1,0 +1,44 @@
+# TODO:
+# - config volume
+# - decide structure of movies/tv/downloads
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvc-downloads
+  namespace: media
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1000Gi
+  volumeName: pv-downloads
+  storageClassName: smb
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-downloads
+spec:
+  capacity:
+    storage: 1000Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: smb
+  mountOptions:
+    - dir_mode=0777
+    - file_mode=0777
+    # - noserverino
+  csi:
+    driver: smb.csi.k8s.io
+    readOnly: false
+    volumeHandle: pv-syn-media-MjIwNTgK  # echo $RANDOM | base64
+    volumeAttributes:
+      source: "//192.168.2.31/plex"
+      subDir: "downloads"
+    nodeStageSecretRef:
+      name: creds-syn
+      namespace: flux-system

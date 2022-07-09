@@ -4,3 +4,4 @@ resources:
   # - config-share.yaml
   - shield-smb-share.yaml
   - syn-smb-share.yaml
+  - syn-downloads.yaml
