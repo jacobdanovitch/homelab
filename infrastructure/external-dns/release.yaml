@@ -24,4 +24,8 @@ spec:
       proxied: true
       email: ${CLOUDFLARE_EMAIL}
       apiKey: ${CLOUDFLARE_API_KEY}
+    
     policy: sync
+    interval: 1m
+    registry: txt
+    txtOwnerId: mediabox # TODO: set this per-cluster 
