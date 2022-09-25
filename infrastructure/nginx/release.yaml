@@ -33,5 +33,8 @@ spec:
         enabled: true
       setAsDefaultIngress: true
       watchIngressWithoutClass: true
+      dnsPolicy: ClusterFirstWithHostNet
+      publishService:
+        enabled: true
     defaultBackend:
       enabled: true
