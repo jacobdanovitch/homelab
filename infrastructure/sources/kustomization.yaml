@@ -8,3 +8,4 @@ resources:
   - podinfo.yaml
   - cloudflare.yaml
   - kubernetes-csi.yaml
+  - tailscale-svc-lb.yaml
