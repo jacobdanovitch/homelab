@@ -1,0 +1,31 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: tailscale-svc-lb
+  namespace: flux-system
+spec:
+  targetNamespace: tailscale
+  releaseName: svc-lb
+  chart:
+    spec:
+      chart: tailscale-svc-lb
+      sourceRef:
+        kind: HelmRepository
+        name: tailscale-svc-lb
+        namespace: flux-system
+  interval: 1h0m0s
+  install:
+    remediation:
+      retries: 3
+  values:
+    tailscaleAuthKey: ${TAILSCALE_AUTH_KEY}
+    proxy:
+      type: Deployment
+      deploymentReplicas: 2
+
+      # NodeLabel to use when creating Tailscale Proxy deployment. The value of this label should be "true"
+      #  Example: "svc-lb.tailscale.iptables.sh/deploy" will use nodeLabelSelector svc-lb.tailscale.iptables.sh/deploy=true
+      # nodeSelectorLabel: "svc-lb.tailscale.iptables.sh/deploy"
+      nodeSelectorLabel: "egress.k3s.io/cluster"
+      generateHostnameFromServiceName: true
+      serviceDomainSuffix: ""

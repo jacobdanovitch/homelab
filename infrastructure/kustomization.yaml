@@ -6,3 +6,5 @@ resources:
   - cloudflared
   - external-dns
   - csi-driver-smb
+  - tailscale-svc-lb
+  - sources
