@@ -9,4 +9,4 @@ resources:
   - cloudflare.yaml
   - kubernetes-csi.yaml
   - tailscale-svc-lb.yaml
-  - hajimari
+  - hajimari.yaml
