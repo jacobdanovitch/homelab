@@ -38,3 +38,20 @@ spec:
         enabled: true
     defaultBackend:
       enabled: true
+  
+  postRenderers:
+    # Instruct helm-controller to use built-in "kustomize" post renderer.
+    - kustomize:
+        # Array of inline strategic merge patch definitions as YAML object.
+        # Note, this is a YAML object and not a string, to avoid syntax
+        # indention errors.
+        patchesStrategicMerge:
+          - kind: Service
+            apiVersion: v1
+            metadata:
+              name: ingress-nginx-controller
+              namespace: ingress-nginx
+            spec:
+              type: LoadBalancer
+              loadBalancerClass: svc-lb.tailscale.iptables.sh/lb
+              allocateLoadBalancerNodePorts: false
