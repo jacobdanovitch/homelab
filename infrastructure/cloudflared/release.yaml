@@ -26,16 +26,30 @@ spec:
       retries: 3
   # Default values
   # https://github.com/cloudflare/argo-tunnel-examples/blob/master/helm/cloudflare-tunnel/values.yaml
+  valuesFrom:
+    - kind: Secret
+      name: cluster-secrets
+      valuesKey: CLOUDFLARED_TUNNEL_ACCOUNT
+      targetPath: cloudflare.account
+    - kind: Secret
+      name: cluster-secrets
+      valuesKey: CLOUDFLARED_TUNNEL_ID
+      targetPath: cloudflare.tunnelId
+    - kind: Secret
+      name: cluster-secrets
+      valuesKey: CLOUDFLARED_TUNNEL_SECRET
+      targetPath: cloudflare.secret
   values:
     cloudflare:
-      account: ${CLOUDFLARED_TUNNEL_ACCOUNT}
+      # account: ${CLOUDFLARED_TUNNEL_ACCOUNT}
       tunnelName: k8s-homelab
-      tunnelId: ${CLOUDFLARED_TUNNEL_ID}
-      secret: ${CLOUDFLARED_TUNNEL_SECRET}
+      # tunnelId: ${CLOUDFLARED_TUNNEL_ID}
+      # secret: ${CLOUDFLARED_TUNNEL_SECRET}
       ingress:
         # hostname: homelab.jacobdanovitch.me
         - service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local
 
     image:
       # https://github.com/cloudflare/cloudflared/issues/617
-      tag: 2022.4.1 # 2022.6.2
+      # tag: 2022.4.1 # 2022.6.2
+      tag: 2022.12.1
